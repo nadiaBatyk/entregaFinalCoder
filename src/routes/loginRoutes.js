@@ -32,6 +32,7 @@ const upload = multer({
   fileFilter: fileFilter,
 });
 
+
 routerUsers
   .route("/register")
   .post(upload.single("userImage"), daos.userDao.createUser);
