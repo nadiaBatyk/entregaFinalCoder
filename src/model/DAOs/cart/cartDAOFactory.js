@@ -1,12 +1,12 @@
-import MongoDBCart from "./mongoDBCart";
+import MongoDBCart from "./mongoDBCart.js";
 
 class CartDaoFactory {
   static get(dbName) {
     switch (dbName) {
       case "mongoDB":
-        return new MongoDBCart();
+        return MongoDBCart.getInstance()
       default:
-        return new MongoDBCart();
+        return MongoDBCart.getInstance()
     }
   }
 }

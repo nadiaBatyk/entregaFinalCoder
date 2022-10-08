@@ -2,11 +2,15 @@ import mongoose from "mongoose";
 import { ErrorCustom } from "../../../error/errorCustom.js";
 
 import connectDB from "./dbConnect.js";
-
+let instance = null;
 class MongoDBDAO {
   constructor(collectionName, schema) {
-    connectDB();
+    
     this.collection = mongoose.model(collectionName, schema);
+  }
+  static getInstance(collectionName, schema) {
+    if (!instance) instance = new MongoDBDAO(collectionName, schema);
+    return instance;
   }
   async getAll() {
     try {
@@ -47,7 +51,6 @@ class MongoDBDAO {
       const err = new ErrorCustom("Item no encontrado", 404, "Not found");
       throw err;
     } catch (error) {
-      console.log(`HOLAAAA`);
       if (error instanceof ErrorCustom) {
         throw error;
       } else {
@@ -104,71 +107,6 @@ class MongoDBDAO {
         404,
         "Not found"
       );
-      throw err;
-    } catch (error) {
-      if (error instanceof ErrorCustom) {
-        throw error;
-      } else {
-        const err = new ErrorCustom(error, 500, "Error");
-        throw err;
-      }
-    }
-  }
-  //FUNCIONES SOLO PARA EL CARRITO
-  async getProductsInCart(idCart) {
-    try {
-      const productsInCart = await this.collection.find(
-        { _id: idCart },
-        { products: 1 }
-      );
-      if (productsInCart) {
-        return productsInCart;
-      }
-      const err = new ErrorCustom("Item no encontrado", 404, "Not found");
-      throw err;
-    } catch (error) {
-      if (error instanceof ErrorCustom) {
-        throw error;
-      } else {
-        const err = new ErrorCustom(error, 500, "Error");
-        throw err;
-      }
-    }
-  }
-  async deleteProductFromCart(idProduct, idCart) {
-    try {
-      const deletedItem = await this.collection.findByIdAndUpdate(
-        idCart,
-        {
-          $pull: {
-            products: { _id: idProduct },
-          },
-        },
-        { safe: true }
-      );
-    } catch (error) {
-      if (error instanceof ErrorCustom) {
-        throw error;
-      } else {
-        const err = new ErrorCustom(error, 500, "Error");
-        throw err;
-      }
-    }
-  }
-  async addProductToCart(product, idCart) {
-    try {
-      const addedItem = await this.collection.updateOne(
-        { _id: idCart },
-        {
-          $push: {
-            products: product,
-          },
-        }
-      );
-      if (addedItem?.modifiedCount) {
-        return `Se modificó el item`;
-      }
-      const err = new ErrorCustom("Item no encontrado", 404, "Not found");
       throw err;
     } catch (error) {
       if (error instanceof ErrorCustom) {

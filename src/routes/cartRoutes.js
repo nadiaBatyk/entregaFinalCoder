@@ -1,22 +1,23 @@
 import { Router } from "express";
-import * as daos from "../persistencia/daos/index.js";
+import { CartController } from "../controllers/cartController.js";
 
 const routerCart = Router();
+const cartController = new CartController()
 
-routerCart.route("/").post(daos.cartDao.createCart).get(daos.cartDao.getCarts);
+routerCart.route("/").post(cartController.createCart).get(cartController.getCarts);
 
 routerCart
   .route("/:id")
-  .delete(daos.cartDao.deleteCart)
-  .get(daos.cartDao.getCarts);
+  .delete(cartController.deleteCart)
+  
 
 routerCart
   .route("/:id/productos")
-  .get(daos.cartDao.getAllProductsInCart)
-  .post(daos.cartDao.addProduct);
+  .get(cartController.getProductsCart)
+  .post(cartController.addProductCart);
 
 routerCart
-  .route("/:id/productos/:id_prod")
-  .delete(daos.cartDao.deleteProductFromCart);
+  .route("/:idCart/productos/:idProd")
+  .delete(cartController.deleteProductCart);
 
 export default routerCart;

@@ -1,96 +1,80 @@
+import { ErrorCustom } from "../../../error/errorCustom.js";
 import MongoDBDAO from "../../db/mongoDB/MongoDBDAO.js";
-import cartSchema from "../../modelos/cartSchema.js";
-
+import cartSchema from "../../models/cartSchema.js";
+let instance = null;
 class MongoDBCart extends MongoDBDAO {
   constructor() {
     super("Carts", cartSchema);
   }
-
-  createCart = (req, res, next) => {
-    let body = req.body;
-
-    super.create(body).then(
-      (item) => {
-        return res.json(item);
-      },
-      (error) => next(error)
-    );
-  };
-  deleteCart = (req, res, next) => {
-    let { id } = req.params;
-    if (id) {
-      super.deleteById(id).then(
-        (item) => {
-          return res.status(200).json(item);
-        },
-        (error) => next(error)
+  static getInstance() {
+    if (!instance) instance = new MongoDBCart("Carts", cartSchema);
+    return instance;
+  }
+  async getProductsInCart(idCart) {
+    try {
+      const productsInCart = await this.collection.find(
+        { _id: idCart },
+        { products: 1 }
       );
+      if (productsInCart) {
+        return productsInCart;
+      }
+      const err = new ErrorCustom("Item no encontrado", 404, "Not found");
+      throw err;
+    } catch (error) {
+      if (error instanceof ErrorCustom) {
+        throw error;
+      } else {
+        const err = new ErrorCustom(error, 500, "Error");
+        throw err;
+      }
+    }
+  }
+  async deleteProductFromCart(idProduct, idCart) {
+    try {
+      const deletedItem = await this.collection.findByIdAndUpdate(
+        idCart,
+        {
+          $pull: {
+            products: { _id: idProduct },
+          },
+        },
+        { safe: true }
+      );
+      if (deletedItem?.deletedCount) {
+        return `Se eliminó el producto ${idProduct} del carrito ${idCart}`;
+      }
+    } catch (error) {
+      if (error instanceof ErrorCustom) {
+        throw error;
+      } else {
+        const err = new ErrorCustom(error, 500, "Error");
+        throw err;
+      }
+    }
+  }
+  addProductToCart = async (product, idCart) => {
+    try {
+      const updatedItem = await this.collection.findOneAndUpdate(
+        { _id: idCart },
+        {
+          $push: {
+            products: product,
+          },
+        },
+        { new: true }
+      );
+      if (updatedItem) return updatedItem;
+      const err = new ErrorCustom("Item no encontrado", 404, "Not found");
+      throw err;
+    } catch (error) {
+      if (error instanceof ErrorCustom) {
+        throw error;
+      } else {
+        const err = new ErrorCustom(error, 500, "Error");
+        throw err;
+      }
     }
   };
-  getAllProductsInCart = (req, res, next) => {
-    let { id } = req.params;
-    if (id) {
-      super.getProductsInCart(id).then(
-        (item) => {
-          return res.status(200).json(item);
-        },
-        (error) => next(error)
-      );
-    }
-  };
-  addProduct = (req, res, next) => {
-    let { id } = req.params;
-    let body = req.body;
-    super.addProductToCart(body, id).then(
-      (item) => {
-        return res.json(item);
-      },
-      (error) => next(error)
-    );
-  };
-  deleteProductFromCart = (req, res, next) => {
-    let { id: idCart, id_prod: idProduct } = req.params;
-    if (idCart) {
-      super.deleteProductFromCart(idProduct, idCart).then(
-        (item) => {
-          return res.status(200).json(item);
-        },
-        (error) => next(error)
-      );
-    }
-  };
-  getCarts = (req, res, next) => {
-    let { id } = req.params;
-    let { userId } = req.query;
-
-    if (id) {
-      super.getById(id).then(
-        (product) => {
-          return res.json(product);
-        },
-        (error) => {
-          return next(error);
-        }
-      );
-    } else if (userId) {
-      console.log(`estoy aca`);
-      super.getByField({ userId: userId }).then(
-        (product) => {
-          return res.json(product);
-        },
-        (error) => {
-          return next(error);
-        }
-      );
-    } else {
-      super.getAll().then(
-        (lista) => {
-          return res.json(lista);
-        },
-        (error) => next(error)
-      );
-    }
-  };
-  getCartByUser = (req, res, next) => {};
 }
 export default MongoDBCart;

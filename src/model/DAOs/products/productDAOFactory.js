@@ -4,9 +4,9 @@ class ProductDaoFactory {
   static get(dbName) {
     switch (dbName) {
       case "mongoDB":
-        return new MongoDBProducts();
+        return MongoDBProducts.getInstance()
       default:
-        return new MongoDBProducts();
+        return MongoDBProducts.getInstance()
     }
   }
 }
