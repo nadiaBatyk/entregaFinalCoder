@@ -1,5 +1,5 @@
 import MongoDBDAO from "../../db/mongoDB/MongoDBDAO.js";
-import productsSchema from "../../modelos/productsSchema.js";
+import productsSchema from "../../models/productsSchema.js";
 
 class MongoDBProducts extends MongoDBDAO {
   constructor() {

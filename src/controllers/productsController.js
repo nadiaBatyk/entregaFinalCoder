@@ -1,4 +1,4 @@
-import { ProductService } from "../services/productService";
+import { ProductService } from "../services/productService.js";
 
 export class ProductController {
     constructor() {
@@ -24,8 +24,8 @@ export class ProductController {
     };
     deleteProduct = async (req, res, next) => {
       try {
-        let idProd = req.params.id;
-        let message = await this.productService.deleteProduct(idProd);
+        let {id} = req.params
+        let message = await this.productService.deleteProduct(id);
         return res.json(message);
       } catch (error) {
         return next(error);
@@ -34,7 +34,8 @@ export class ProductController {
     updateProduct = async (req, res, next) => {
       try {
         let product = req.body;
-        let newProduct = await this.productService.updateProduct(product);
+        let {id} = req.params
+        let newProduct = await this.productService.updateProduct(product,id);
         return res.json(newProduct);
       } catch (error) {
         return next(error);

@@ -1,6 +1,6 @@
-import config from "../config/config";
-import ProductDaoFactory from "../model/DAOs/products/productDAOFactory";
-import ProductDTO from "../model/DTOs/productDTO";
+import config from "../config/config.js";
+import ProductDaoFactory from "../model/DAOs/products/productDAOFactory.js";
+import ProductDTO from "../model/DTOs/productDTO.js";
 
 export class ProductService {
     constructor(){
@@ -14,8 +14,8 @@ export class ProductService {
         const prod = await this.productDao.create(product);
         return new ProductDTO(prod);
       }
-      async updateProduct(product) {
-        const prod = await this.productDao.update(product);
+      async updateProduct(product,id) {
+        const prod = await this.productDao.update(product,id);
         return new ProductDTO(prod);
       }
       async deleteProduct(idProd) {

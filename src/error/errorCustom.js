@@ -1,4 +1,4 @@
-export  class ErrorCustom extends Error {
+export class ErrorCustom extends Error {
     status;
     
     constructor(message , status, name) {

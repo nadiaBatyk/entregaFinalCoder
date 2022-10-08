@@ -13,6 +13,6 @@ routerProducts
   .route("/:id")
   .get(productController.getProducts)
   .put(productController.updateProduct)
-  .delete(productController.deleteProduct);
+  .delete(productController.deleteProduct)
 
 export default routerProducts;

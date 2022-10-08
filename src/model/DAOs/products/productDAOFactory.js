@@ -1,4 +1,4 @@
-import MongoDBProducts from "./MongoDBProducts";
+import MongoDBProducts from "./MongoDBProducts.js";
 
 class ProductDaoFactory {
   static get(dbName) {

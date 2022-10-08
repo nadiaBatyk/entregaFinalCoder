@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import { ErrorCustom } from "../../error/errorCustom.js";
+import { ErrorCustom } from "../../../error/errorCustom.js";
+
 import connectDB from "./dbConnect.js";
 
 class MongoDBDAO {
@@ -90,17 +91,16 @@ class MongoDBDAO {
       }
     }
   }
-  async update(item) {
+  async update(item, id) {
     try {
-      const updatedItem = await this.collection.updateOne(
-        { _id: item.id },
-        item
+      const updatedItem = await this.collection.findOneAndUpdate(
+        { _id: id },
+        item,
+        { new: true }
       );
-      if (updatedItem?.modifiedCount) {
-        return `Se modificó el item`;
-      }
+      if (updatedItem) return updatedItem;
       const err = new ErrorCustom(
-        `Item no encontrado ${item.id}`,
+        `Item no encontrado ${item._id}`,
         404,
         "Not found"
       );
