@@ -1,5 +1,5 @@
 import MongoClass from "../../contenedores/mongoClass.js";
-import cartSchema from "../../schemas/cartSchema.js";
+import cartSchema from "../../modelos/cartSchema.js";
 
 class MongoDBCart extends MongoClass {
   constructor() {
@@ -51,7 +51,7 @@ class MongoDBCart extends MongoClass {
   deleteProductFromCart = (req, res, next) => {
     let { id: idCart, id_prod: idProduct } = req.params;
     if (idCart) {
-      super.deleteProductFromCart(idProduct,idCart).then(
+      super.deleteProductFromCart(idProduct, idCart).then(
         (item) => {
           return res.status(200).json(item);
         },
@@ -62,31 +62,27 @@ class MongoDBCart extends MongoClass {
   getCarts = (req, res, next) => {
     let { id } = req.params;
     let { userId } = req.query;
- 
+
     if (id) {
       super.getById(id).then(
         (product) => {
           return res.json(product);
         },
         (error) => {
-          
           return next(error);
         }
       );
-    }else if(userId) {
+    } else if (userId) {
       console.log(`estoy aca`);
-      super.getByField({userId:userId}).then(
+      super.getByField({ userId: userId }).then(
         (product) => {
           return res.json(product);
         },
         (error) => {
-          
           return next(error);
         }
       );
-    
-    }
-    else {
+    } else {
       super.getAll().then(
         (lista) => {
           return res.json(lista);
@@ -95,8 +91,6 @@ class MongoDBCart extends MongoClass {
       );
     }
   };
-  getCartByUser=(req, res, next)=>{
-    
-  }
+  getCartByUser = (req, res, next) => {};
 }
 export default MongoDBCart;

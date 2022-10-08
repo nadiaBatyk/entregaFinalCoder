@@ -1,12 +1,9 @@
 import { Router } from "express";
-import * as daos from "../daos/index.js";
+import * as daos from "../persistencia/daos/index.js";
 
 const routerCart = Router();
 
-routerCart
-  .route("/")
-  .post(daos.cartDao.createCart)
-  .get(daos.cartDao.getCarts)
+routerCart.route("/").post(daos.cartDao.createCart).get(daos.cartDao.getCarts);
 
 routerCart
   .route("/:id")

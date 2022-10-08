@@ -1,7 +1,7 @@
 import MongoClass from "../../contenedores/mongoClass.js";
 import { PlantillaNuevoPedido } from "../../../emails/nuevoPedido.js";
 import { MensajeBase } from "../../../mensajes/mensajeClass.js";
-import orderSchema from "../../schemas/orderSchema.js";
+import orderSchema from "../../modelos/orderSchema.js";
 
 
 class MongoDBOrder extends MongoClass {

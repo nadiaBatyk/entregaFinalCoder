@@ -3,7 +3,7 @@ import config from "../../config/config.js";
 import { ErrorCustom } from "../../error/errorCustom.js";
 
 
-mongoose.connect(config.mongoDB.URL, config.mongoDB.options);
+mongoose.connect(config.MONGODB.URL, config.MONGODB.options);
 
 class MongoClass {
     

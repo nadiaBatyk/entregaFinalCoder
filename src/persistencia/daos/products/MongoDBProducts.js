@@ -1,5 +1,5 @@
 import MongoClass from "../../contenedores/mongoClass.js";
-import productsSchema from "../../schemas/productsSchema.js";
+import productsSchema from "../../modelos/productsSchema.js"
 
 class MongoDBProducts extends MongoClass {
   

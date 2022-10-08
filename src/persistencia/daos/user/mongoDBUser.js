@@ -1,5 +1,5 @@
 import MongoClass from "../../contenedores/mongoClass.js";
-import userSchema from "../../schemas/userSchema.js";
+import userSchema from "../../modelos/userSchema.js";
 
 import dotenv from "dotenv";
 dotenv.config();

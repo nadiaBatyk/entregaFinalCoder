@@ -1,14 +1,13 @@
 import { Router } from "express";
-import * as daos from "../daos/index.js";
+import * as daos from "../persistencia/daos/index.js";
 import multer from "multer";
 const routerUsers = Router();
-import path from 'path';
-import { fileURLToPath } from 'url';
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 
 const __dirname = path.dirname(__filename);
-
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -30,7 +29,7 @@ const upload = multer({
   limits: {
     fileSize: 1024 * 1024 * 5,
   },
- fileFilter:fileFilter
+  fileFilter: fileFilter,
 });
 
 routerUsers
@@ -38,6 +37,6 @@ routerUsers
   .post(upload.single("userImage"), daos.userDao.createUser);
 
 routerUsers.route("/login").post(daos.userDao.logUser);
-routerUsers.route('/users').get(daos.userDao.getUsers)
+routerUsers.route("/users").get(daos.userDao.getUsers);
 
 export default routerUsers;
