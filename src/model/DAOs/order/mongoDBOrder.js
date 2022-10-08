@@ -1,4 +1,4 @@
-import MongoDBDAO from "../../db/MongoDBDAO.js";
+import MongoDBDAO from "../../db/mongoDB/MongoDBDAO.js";
 import { PlantillaNuevoPedido } from "../../../emails/nuevoPedido.js";
 import { MensajeBase } from "../../../mensajes/mensajeClass.js";
 import orderSchema from "../../modelos/orderSchema.js";

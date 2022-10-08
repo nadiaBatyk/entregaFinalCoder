@@ -1,4 +1,4 @@
-import MongoDBDAO from "../../db/MongoDBDAO.js";
+import MongoDBDAO from "../../db/mongoDB/MongoDBDAO.js";
 import cartSchema from "../../modelos/cartSchema.js";
 
 class MongoDBCart extends MongoDBDAO {

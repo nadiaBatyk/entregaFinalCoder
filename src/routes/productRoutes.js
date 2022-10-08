@@ -1,18 +1,18 @@
 import { Router } from "express";
-import * as daos from "../persistencia/daos/index.js";
+import { ProductController } from "../controllers/productsController.js";
 
 const routerProducts = Router();
+const productController = new ProductController();
 
+routerProducts
+  .route("/")
+  .get(productController.getProducts)
+  .post(productController.createProduct);
 
-
-routerProducts.route('/')
-.get(daos.productDao.getProducts)
-.post(daos.productDao.createProduct)
-
-routerProducts.route('/:id')
-.get(daos.productDao.getProducts)
-.put(daos.productDao.updateProduct)
-.delete(daos.productDao.deleteProduct);
-
+routerProducts
+  .route("/:id")
+  .get(productController.getProducts)
+  .put(productController.updateProduct)
+  .delete(productController.deleteProduct);
 
 export default routerProducts;

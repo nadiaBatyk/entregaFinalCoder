@@ -1,4 +1,4 @@
-import MongoDBDAO from "../../db/MongoDBDAO.js";
+import MongoDBDAO from "../../db/mongoDB/MongoDBDAO.js";
 import userSchema from "../../modelos/userSchema.js";
 
 import dotenv from "dotenv";
