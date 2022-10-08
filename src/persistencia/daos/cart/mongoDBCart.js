@@ -1,7 +1,7 @@
-import MongoClass from "../../contenedores/mongoClass.js";
+import MongoDBDAO from "../../DB/MongoDBDAO.js";
 import cartSchema from "../../modelos/cartSchema.js";
 
-class MongoDBCart extends MongoClass {
+class MongoDBCart extends MongoDBDAO {
   constructor() {
     super("Carts", cartSchema);
   }

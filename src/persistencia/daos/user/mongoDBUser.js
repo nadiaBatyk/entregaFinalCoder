@@ -1,4 +1,4 @@
-import MongoClass from "../../contenedores/mongoClass.js";
+import MongoDBDAO from "../../DB/MongoDBDAO.js";
 import userSchema from "../../modelos/userSchema.js";
 
 import dotenv from "dotenv";
@@ -6,7 +6,7 @@ dotenv.config();
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
-class MongoDBUsers extends MongoClass {
+class MongoDBUsers extends MongoDBDAO {
   constructor() {
     super("Users", userSchema);
   }
@@ -43,16 +43,16 @@ class MongoDBUsers extends MongoClass {
         return res
           .status(409)
           .json({ message: `User already exist. Please log in` });
-        console.log(req.file);
+      console.log(req.file);
       let encryptedPass = await bcrypt.hash(body.password, 10);
       body.password = encryptedPass;
       body.email = body.email.toLowerCase();
-      if(req.file){
-        body.userImage = req.file.path.replace(/\\/g, "/")
-      }else{
-        body.userImage=null
+      if (req.file) {
+        body.userImage = req.file.path.replace(/\\/g, "/");
+      } else {
+        body.userImage = null;
       }
-      
+
       const user = await super.create(body);
       const token = jwt.sign(
         { userId: user._id, email: body.email },

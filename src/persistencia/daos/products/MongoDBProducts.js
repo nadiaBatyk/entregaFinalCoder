@@ -1,16 +1,13 @@
-import MongoClass from "../../contenedores/mongoClass.js";
-import productsSchema from "../../modelos/productsSchema.js"
+import MongoDBDAO from "../../db/MongoDBDAO.js";
+import productsSchema from "../../modelos/productsSchema.js";
 
-class MongoDBProducts extends MongoClass {
-  
+class MongoDBProducts extends MongoDBDAO {
   constructor() {
     super("Products", productsSchema);
-    
   }
 
- 
-  isAdmin=true;
-  getProducts= (req, res, next)=> {
+  isAdmin = true;
+  getProducts = (req, res, next) => {
     //muestro todos los productos disponibles o si me pasan id, solo ese prod
     let { id } = req.params;
     if (id) {
@@ -32,9 +29,8 @@ class MongoDBProducts extends MongoClass {
       );
       //pasa todo el array de productos en el json
     }
-  }
+  };
   createProduct = (req, res, next) => {
-    
     if (!this.isAdmin) {
       return res.status(401).json({
         error: 401,
@@ -42,17 +38,17 @@ class MongoDBProducts extends MongoClass {
       });
     }
     let body = req.body;
-    
+
     super.create(body).then(
       (item) => {
         return res.json(item);
       },
       (error) => next(error)
     );
-  }
+  };
 
-  updateProduct =(req, res, next) => {
-    let isAdmin=true;
+  updateProduct = (req, res, next) => {
+    let isAdmin = true;
     if (!isAdmin) {
       return res.status(401).json({
         error: 401,
@@ -70,9 +66,9 @@ class MongoDBProducts extends MongoClass {
         (error) => next(error)
       );
     }
-  }
-  deleteProduct=(req, res, next) =>{
-    let isAdmin=true;
+  };
+  deleteProduct = (req, res, next) => {
+    let isAdmin = true;
     if (!isAdmin) {
       return res.status(401).json({
         error: 401,
@@ -89,6 +85,6 @@ class MongoDBProducts extends MongoClass {
         (error) => next(error)
       );
     }
-  }
+  };
 }
 export default MongoDBProducts;
