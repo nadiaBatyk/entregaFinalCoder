@@ -1,12 +1,12 @@
-import MongoDBUsers from "./mongoDBUser";
+import MongoDBUsers from "./mongoDBUser.js";
 
 class UserDaoFactory {
   static get(dbName) {
     switch (dbName) {
       case "mongoDB":
-        return new MongoDBUsers();
+        return MongoDBUsers.getInstance()
       default:
-        return new MongoDBUsers();
+        return MongoDBUsers.getInstance()
     }
   }
 }

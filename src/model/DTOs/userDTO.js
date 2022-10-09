@@ -1,9 +1,9 @@
 class UserDTO{
     constructor(data){
-        this.name=data.name,
+        this.fullName=data.fullName,
         this.email=data.email,
         this.phone=data.phone,
-        this.userImage=data.userImage,
+        this.address=data.address,
         this._id=data._id,
         this.token=data.token
     }

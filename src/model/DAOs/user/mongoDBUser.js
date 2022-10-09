@@ -1,120 +1,53 @@
 import MongoDBDAO from "../../db/mongoDB/MongoDBDAO.js";
-import userSchema from "../../modelos/userSchema.js";
-
-import dotenv from "dotenv";
-dotenv.config();
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
-
+import userSchema from "../../models/userSchema.js";
+import { ErrorCustom } from "../../../error/errorCustom.js";
+let instance = null;
 class MongoDBUsers extends MongoDBDAO {
   constructor() {
     super("Users", userSchema);
   }
-
-  getUsers = (req, res, next) => {
-    let { id } = req.params;
-    if (id) {
-      super.getById(id).then(
-        (product) => {
-          return res.json(product);
-        },
-        (error) => {
-          return next(error);
-        }
-      );
-    } else {
-      super.getAll().then(
-        (lista) => {
-          return res.json(lista);
-        },
-        (error) => next(error)
-      );
-    }
-  };
-  createUser = async (req, res, next) => {
+  static getInstance() {
+    if (!instance) instance = new MongoDBUsers("Users", userSchema);
+    return instance;
+  }
+  async createUser(newUser) {
     try {
-      let body = req.body;
-      if (Object.values(body).some((v) => !v))
-        return res.status(400).json({ message: `All items are required` });
-
-      const oldUser = await this.collection.findOne({ email: body.email });
-
-      if (oldUser)
-        return res
-          .status(409)
-          .json({ message: `User already exist. Please log in` });
-      console.log(req.file);
-      let encryptedPass = await bcrypt.hash(body.password, 10);
-      body.password = encryptedPass;
-      body.email = body.email.toLowerCase();
-      if (req.file) {
-        body.userImage = req.file.path.replace(/\\/g, "/");
-      } else {
-        body.userImage = null;
-      }
-
-      const user = await super.create(body);
-      const token = jwt.sign(
-        { userId: user._id, email: body.email },
-        process.env.TOKEN_KEY,
-        {
-          expiresIn: "1h",
-        }
-      );
-      user.token = token;
-      /* const mail = new PlantillaNuevoUser(user);
-      mail.sendMail(); */
-      return res.status(200).json(user);
-    } catch (error) {
-      next(error);
-    }
-  };
-  logUser = async (req, res, next) => {
-    try {
-      const { email, password } = req.body;
-      if (Object.values(req.body).some((v) => !v))
-        return res.status(400).json({ message: `All items are required` });
-      const user = await this.collection.findOne({ email });
-      if (user && (await bcrypt.compare(password, user.password))) {
-        const token = jwt.sign(
-          { userId: user._id, email },
-          process.env.TOKEN_KEY,
-          {
-            expiresIn: "1h",
-          }
+      const oldUser = await this.collection.findById({ email: newUser.email });
+      if (oldUser) {
+        const err = new ErrorCustom(
+          `User already exist. Please log in`,
+          409,
+          "Existent user"
         );
-        user.token = token;
-
-        return res.status(200).json(user);
+        throw err;
       }
-      return res.status(400).json({ message: `Invalid credentials` });
+      const user = await this.collection.create(newUser);
+      if (user) return user;
     } catch (error) {
-      next(error);
+      if (error instanceof ErrorCustom) {
+        throw error;
+      } else {
+        const err = new ErrorCustom(error, 500, "Error");
+        throw err;
+      }
     }
-  };
-
-  updateUser = (req, res, next) => {
-    let { id } = req.params;
-    let body = req.body;
-    if (id) {
-      super.update(body).then(
-        (item) => {
-          return res.status(200).json(item);
-        },
-        (error) => next(error)
-      );
+  }
+  async getUserByEmail(email) {
+    try {
+      const user = await this.collection.findOne({ email });
+      if (!user) {
+        const err = new ErrorCustom(`User not found`, 404, "Non-existent user");
+        throw err;
+      }
+      if (user) return user;
+    } catch (error) {
+      if (error instanceof ErrorCustom) {
+        throw error;
+      } else {
+        const err = new ErrorCustom(error, 500, "Error");
+        throw err;
+      }
     }
-  };
-  deleteUser = (req, res, next) => {
-    let { id } = req.params;
-    if (id) {
-      super.deleteById(id).then(
-        (item) => {
-          return res.status(200).json(item);
-        },
-        (error) => next(error)
-      );
-    }
-  };
+  }
 }
 export default MongoDBUsers;
