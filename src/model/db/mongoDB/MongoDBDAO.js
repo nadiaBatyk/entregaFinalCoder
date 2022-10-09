@@ -1,11 +1,9 @@
 import mongoose from "mongoose";
 import { ErrorCustom } from "../../../error/errorCustom.js";
 
-import connectDB from "./dbConnect.js";
 let instance = null;
 class MongoDBDAO {
   constructor(collectionName, schema) {
-    
     this.collection = mongoose.model(collectionName, schema);
   }
   static getInstance(collectionName, schema) {

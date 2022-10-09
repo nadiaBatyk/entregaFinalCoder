@@ -12,12 +12,12 @@ class MongoDBCart extends MongoDBDAO {
   }
   async getProductsInCart(idCart) {
     try {
-      const productsInCart = await this.collection.find(
+      const productsInCart = await this.collection.findById(
         { _id: idCart },
-        { products: 1 }
+        { products: 1,_id:0 }
       );
-      if (productsInCart) {
-        return productsInCart;
+      if (productsInCart?.products) {
+        return productsInCart.products;
       }
       const err = new ErrorCustom("Item no encontrado", 404, "Not found");
       throw err;
@@ -32,16 +32,16 @@ class MongoDBCart extends MongoDBDAO {
   }
   async deleteProductFromCart(idProduct, idCart) {
     try {
-      const deletedItem = await this.collection.findByIdAndUpdate(
+      const newCart = await this.collection.findByIdAndUpdate(
         idCart,
         {
           $pull: {
             products: { _id: idProduct },
           },
         },
-        { safe: true }
+        { safe: true ,new:true}
       );
-      if (deletedItem?.deletedCount) {
+      if (newCart) {
         return `Se eliminó el producto ${idProduct} del carrito ${idCart}`;
       }
     } catch (error) {
