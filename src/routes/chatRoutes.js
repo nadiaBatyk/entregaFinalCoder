@@ -9,6 +9,6 @@ routerProducts
   .get(chatController.getMessages)
   .post(chatController.createMessage);
 
-routerProducts.route("/:email").get(chatController.getUserMessages);
+routerProducts.route("/:email").get(chatController.getMessagesByEmail);
 
 export default routerChat;

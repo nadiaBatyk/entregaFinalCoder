@@ -1,8 +1,9 @@
 import config from "../config/config.js";
+import MessagesDaoFactory from "../model/DAOs/message/messageDAOFactory.js";
 import MessageDTO from "../model/DTOs/messageDTO.js";
 export class ChatService {
     constructor(){
-        this.chatDao = ChatDaoFactory.get(config.DB_NAME);
+        this.chatDao = MessagesDaoFactory.get(config.DB_NAME);
     }
     async getMessages() {
         const chats = await this.chatDao.getAll();
