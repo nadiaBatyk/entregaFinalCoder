@@ -26,17 +26,18 @@ export class UserController {
     try {
       let user = req.body;
       let newUser = await this.userService.createUser(user);
-      return res.json(newUser);
+      req.session.user = newUser;
+      return res.redirect("/productos");
     } catch (error) {
       return next(error);
     }
   };
   logUser = async (req, res, next) => {
     try {
-      let {email,password} = req.body;
-      let loggedUser = await this.userService.logUser(email,password);
-      req.session.user=loggedUser
-      return res.redirect('/productos')
+      let { email, password } = req.body;
+      let loggedUser = await this.userService.logUser(email, password);
+      req.session.user = loggedUser;
+      return res.redirect("/productos");
     } catch (error) {
       return next(error);
     }
@@ -60,10 +61,12 @@ export class UserController {
       return next(error);
     }
   };
-  loginRender =  (req, res, next) => {
-    res.render("layouts/login", { layout: "login" });
+  loginRender = (req, res, next) => {
+    if (req.session.user) return res.redirect("/productos");
+    return res.render("layouts/login", { layout: "login" });
   };
   registerRender = (req, res, next) => {
-    res.render("layouts/registro", { layout: "registro" });
+    if (req.session.user) return res.redirect("/productos");
+    return res.render("layouts/registro", { layout: "registro" });
   };
 }

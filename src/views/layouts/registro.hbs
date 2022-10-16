@@ -19,7 +19,12 @@
       <h1>Registro de Usuario</h1>
       <form action="/register" method="post">
         <div class="mb-3 w-50">
-          <label for="nombre" class="form-label">Indica el mail de tu cuenta</label>
+          <label for="fullName" class="form-label">Nombre completo</label>
+          <input type="text" class="form-control" name="fullName" />
+
+        </div>
+        <div class="mb-3 w-50">
+          <label for="nombre" class="form-label">Email</label>
           <input type="email" class="form-control" name="email" />
 
         </div>
@@ -28,10 +33,26 @@
           <input type="password" class="form-control" name="password" />
 
         </div>
+        <div class="mb-3 w-50">
+          <label for="confirmPassword" class="form-label">Confirmá tu contraseña</label>
+          <input type="password" class="form-control" name="confirmPassword" />
+
+        </div>
+        <div class="mb-3 w-50">
+          <label for="address" class="form-label">Dirección</label>
+          <input type="text" class="form-control" name="address" />
+
+        </div>
+        <div class="mb-3 w-50">
+          <label for="phone" class="form-label">Teléfono</label>
+          <input type="tel" class="form-control" name="phone" />
+
+        </div>
         <button type="submit" class="btn btn-primary" id="botonAgregar">Crear
           cuenta</button>
       </form>
-      <button  class="btn btn-secondary" onclick="location.href='/'">Volver al Login</button>
+      <button class="btn btn-secondary" onclick="location.href='/'">Volver al
+        Login</button>
 
     </div>
     <script
