@@ -1,12 +1,13 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import config from "../config/config.js";
 dotenv.config();
 
-const {TOKEN_KEY} = process.env;
+const {TOKEN_KEY} = config;
 
  const verifyToken = (req,res,next)=>{
-    console.log(req.headers);
-    const token = req.body.token || req.query.token || req.headers['authorization']
+
+    const token = req.body.token || req.query.token || req.headers['authorization'] || req.session.user.token
     if(!token) return res.status(403).json({message:`Unauthenticated`})
     try {
         const decoded = jwt.verify(token,TOKEN_KEY);

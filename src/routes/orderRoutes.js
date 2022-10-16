@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as daos from "../persistencia/daos/index.js";
+/* import * as daos from "../persistencia/daos/index.js";
 
 const routerOrder = Router();
 
@@ -14,4 +14,4 @@ routerOrder
   .get(daos.orderDao.getOrders)
   .delete(daos.orderDao.deleteOrder);
 
-export default routerOrder;
+export default routerOrder; */

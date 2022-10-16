@@ -4,12 +4,16 @@ import routerCart from "./routes/cartRoutes.js";
 import routerProducts from "./routes/productRoutes.js";
 import routerLogin from "./routes/loginRoutes.js";
 import verifyToken from "./middlewares/auth.js";
-import routerOrder from "./routes/orderRoutes.js";
+//import routerOrder from "./routes/orderRoutes.js";
 import logger from "./config/winstonConfig.js";
 import compression from "compression";
 import config from "./config/config.js";
 import connectDB from "./model/db/mongoDB/dbConnect.js";
-
+import sessionConfig from "./config/MongosessionConfig.js";
+import session from "express-session";
+import path from 'path';
+import { engine } from "express-handlebars";
+const __dirname = path.resolve();
 //servidor
 const app = express();
 //conexion DB
@@ -18,13 +22,29 @@ connectDB();
 //middlewares
 app.use(compression());
 app.use(express.json());
+app.use(session(sessionConfig));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname + "/src/public"));
+
+//MOTOR DE PLANTILLAS
+app.set("view engine", "hbs");
+///CONFIGURACION HANDLEBARS
+app.engine(
+  "hbs",
+  engine({
+    extname: ".hbs",
+    defaultLayout: "index.hbs",
+    layoutsDir: __dirname + "/src/views/layouts",
+  })
+);
+
+//DONDE ESTAN LOS ARCHIVOS DE PLANTILLA
+app.set("views", "src/views");
 
 //rutas
-app.use("/uploads", express.static(process.cwd() + "/uploads"));
-app.use("/api/productos", routerProducts);
-app.use("/api/carrito", routerCart);
-app.use("/api/orders", routerOrder);
+app.use("/productos", routerProducts);
+app.use("/carrito", routerCart);
+//app.use("/orders", routerOrder);
 app.use("/", routerLogin);
 // app.get("*.ico", function () {});
 /* app.use("*", notFoundRouter);

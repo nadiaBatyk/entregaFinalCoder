@@ -7,9 +7,10 @@ import {
 
 const routerUsers = Router();
 const userController = new UserController();
-
+routerUsers.route("/").get(userController.loginRender);
 routerUsers
   .route("/register")
+  .get(userController.registerRender)
   .post(createUserValidator, userController.createUser);
 routerUsers.route("/login").post(logUserValidator, userController.logUser);
 routerUsers.route("/users").get(userController.getUsers);

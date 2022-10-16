@@ -35,7 +35,8 @@ export class UserController {
     try {
       let {email,password} = req.body;
       let loggedUser = await this.userService.logUser(email,password);
-      return res.json(loggedUser);
+      req.session.user=loggedUser
+      return res.redirect('/productos')
     } catch (error) {
       return next(error);
     }
@@ -58,5 +59,11 @@ export class UserController {
     } catch (error) {
       return next(error);
     }
+  };
+  loginRender =  (req, res, next) => {
+    res.render("layouts/login", { layout: "login" });
+  };
+  registerRender = (req, res, next) => {
+    res.render("layouts/registro", { layout: "registro" });
   };
 }
