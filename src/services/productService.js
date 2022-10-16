@@ -10,6 +10,10 @@ export class ProductService {
         const prod = await this.productDao.getAll();
         return prod.map((p) => new ProductDTO(p));
       }
+      async getProductsByCategory(categoria) {
+        const prod = await this.productDao.getByCategory(categoria);
+        return prod.map((p) => new ProductDTO(p));
+      }
       async createProduct(product) {
         const prod = await this.productDao.create(product);
         return new ProductDTO(prod);

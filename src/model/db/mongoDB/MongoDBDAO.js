@@ -37,26 +37,8 @@ class MongoDBDAO {
       }
     }
   }
-  async getByField(field) {
-    try {
-      const idData = await this.collection.findOne(field, function (err, obj) {
-        console.log(obj);
-      });
-
-      if (idData?.length) {
-        return idData;
-      }
-      const err = new ErrorCustom("Item no encontrado", 404, "Not found");
-      throw err;
-    } catch (error) {
-      if (error instanceof ErrorCustom) {
-        throw error;
-      } else {
-        const err = new ErrorCustom(error, 500, "Error");
-        throw err;
-      }
-    }
-  }
+  
+  
 
   async deleteById(id) {
     try {

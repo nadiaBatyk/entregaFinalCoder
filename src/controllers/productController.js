@@ -12,6 +12,15 @@ export class ProductController {
         return next(error);
       }
     };
+    getProductsByCategory = async (req, res, next) => {
+      try {
+        let {categoria} = req.params
+        let products = await this.productService.getProductsByCategory(categoria);
+        return res.json(products);
+      } catch (error) {
+        return next(error);
+      }
+    };
   
     createProduct = async (req, res, next) => {
       try {
@@ -41,4 +50,5 @@ export class ProductController {
         return next(error);
       }
     };
+
   };
