@@ -22,9 +22,11 @@
         <input
           class="form-control input-size-m mb-2"
           type="text"
+          disabled
           id="emailFrom"
           aria-required="true"
-          placeholder="Ingresá tu mail"
+          value="{{userData.email}}"
+          placeholder="{{userData.email}}"
         />
         <input
           class="form-control input-size-m mb-2"
@@ -36,9 +38,11 @@
         <input
           class="form-control input-size-m mb-2"
           type="text"
+          disabled
+          value="{{userData.type}}"
           id="type"
           aria-required="true"
-          placeholder="Ingresá tu rol"
+          placeholder="{{userData.type}}"
         />
         
         <div class="row g-3">

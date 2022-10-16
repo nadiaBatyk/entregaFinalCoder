@@ -2,8 +2,6 @@ const socket = io();
 
 //MENSAJES
 socket.on("datosMensajes", (mensaje) => {
-  console.log(mensaje);
-
   return renderMensajes(mensaje);
 });
 function renderMensajes(mensaje) {
@@ -35,6 +33,7 @@ function addMessage() {
     type: document.getElementById("type").value,
     text: document.getElementById("text").value,
   };
+  console.log(mensaje);
   (document.getElementById("emailFrom").value = ""),
     (document.getElementById("emailTo").value = ""),
     (document.getElementById("type").value = ""),

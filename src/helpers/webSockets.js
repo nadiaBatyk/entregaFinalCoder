@@ -14,10 +14,8 @@ async function socketConnect(socket) {
 
   socket.on("nuevo-mensaje", async (mensaje) => {
     try {
-      console.log("NUEVO mensaje", mensaje);
-      await chatService.createMessage(mensaje)
+      await chatService.createMessage(mensaje);
       const messages = await chatService.getMessages();
-
       socket.emit("datosMensajes", messages);
     } catch (error) {
       logger.error(error);
