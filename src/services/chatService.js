@@ -1,0 +1,20 @@
+import config from "../config/config.js";
+import MessageDTO from "../model/DTOs/messageDTO.js";
+export class ChatService {
+    constructor(){
+        this.chatDao = ChatDaoFactory.get(config.DB_NAME);
+    }
+    async getMessages() {
+        const chats = await this.chatDao.getAll();
+        return chats.map((c) => new MessageDTO(c));
+      }
+      async getMessagesByEmail(email) {
+        const chats = await this.chatDao.getByEmail(email);
+        return chats.map((c) => new MessageDTO(c));
+      }
+      async createMessage(message) {
+        const message = await this.chatDao.create(message);
+        return new MessageDTO(message);
+      }
+      
+}
