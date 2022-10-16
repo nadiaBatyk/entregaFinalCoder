@@ -45,6 +45,8 @@ app.set("views", "src/views");
 app.use("/productos", routerProducts);
 app.use("/carrito", routerCart);
 //app.use("/orders", routerOrder);
+app.use("/chat");
+app.use("/config");
 app.use("/", routerLogin);
 // app.get("*.ico", function () {});
 /* app.use("*", notFoundRouter);

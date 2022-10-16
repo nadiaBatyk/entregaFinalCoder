@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { ProductController } from "../controllers/productController.js";
+import { createProductValidator } from "../validators/productValidator.js";
 
 const routerProducts = Router();
 const productController = new ProductController();
@@ -7,12 +8,12 @@ const productController = new ProductController();
 routerProducts
   .route("/")
   .get(productController.getProducts)
-  .post(productController.createProduct);
+  .post(createProductValidator,productController.createProduct);
 
 routerProducts
   .route("/:id")
   .get(productController.getProducts)
-  .put(productController.updateProduct)
+  .put(createProductValidator,productController.updateProduct)
   .delete(productController.deleteProduct)
 
 export default routerProducts;
