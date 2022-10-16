@@ -13,6 +13,7 @@ import sessionConfig from "./config/MongosessionConfig.js";
 import session from "express-session";
 import path from 'path';
 import { engine } from "express-handlebars";
+import routerInfo from "./routes/infoRoutes.js";
 const __dirname = path.resolve();
 //servidor
 const app = express();
@@ -45,8 +46,8 @@ app.set("views", "src/views");
 app.use("/productos", routerProducts);
 app.use("/carrito", routerCart);
 //app.use("/orders", routerOrder);
-app.use("/chat");
-app.use("/config");
+//app.use("/chat");
+app.use("/config",routerInfo);
 app.use("/", routerLogin);
 // app.get("*.ico", function () {});
 /* app.use("*", notFoundRouter);
