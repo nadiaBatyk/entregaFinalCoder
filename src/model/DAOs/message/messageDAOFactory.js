@@ -1,4 +1,4 @@
-import MongoDBMessages from "./MongoDBMessages";
+import MongoDBMessages from "./MongoDBMessages.js";
 
 
 class MessagesDaoFactory {

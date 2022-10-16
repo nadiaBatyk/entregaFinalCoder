@@ -22,7 +22,6 @@
     "express-handlebars": "^6.0.6",
     "express-joi-validation": "^5.0.1",
     "express-session": "^1.17.3",
-    "firebase-admin": "^11.0.0",
     "handlebars": "^4.7.7",
     "joi": "^17.6.2",
     "jsonwebtoken": "^8.5.1",

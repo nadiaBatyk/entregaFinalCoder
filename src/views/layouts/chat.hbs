@@ -1,0 +1,82 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+
+    <title>API - WEBSOCKET </title>
+  </head>
+
+  <body>
+    <div class="container mt-5 w-75 bg-color p-5 mb-5">
+      <h2 class="mb-3">Centro de mensajes</h2>
+      <form>
+        <input
+          class="form-control input-size-m mb-2"
+          type="text"
+          id="emailFrom"
+          aria-required="true"
+          placeholder="Ingresá tu mail"
+        />
+        <input
+          class="form-control input-size-m mb-2"
+          type="text"
+          id="emailTo"
+          aria-required="true"
+          placeholder="Ingresá el mail del destinatario"
+        />
+        <input
+          class="form-control input-size-m mb-2"
+          type="text"
+          id="type"
+          aria-required="true"
+          placeholder="Ingresá tu rol"
+        />
+        
+        <div class="row g-3">
+          <div class="col-auto">
+            <input
+              class="form-control input-size-l mb-2"
+              type="text"
+              id="text"
+              placeholder="Ingresá tu mensaje..."
+            />
+          </div>
+
+          <div class="col-auto">
+            <button
+              type="button"
+              class="btn btn-primary input-size-xs"
+              id="botonMensaje"
+            >Enviar</button>
+          </div>
+
+        </div>
+      </form>
+      <hr />
+      <div id="mensajes">
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+    <!-- PARA INICIALIZAR EL WEBSOCKET DEL LADO DEL CLIENTE -->
+
+    <script src="/socket.io/socket.io.min.js"></script>
+
+    <script src="main.js" type="module"></script>
+  </body>
+</html>

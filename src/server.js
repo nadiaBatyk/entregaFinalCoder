@@ -15,23 +15,25 @@ import path from "path";
 import { engine } from "express-handlebars";
 import routerInfo from "./routes/infoRoutes.js";
 import http from "http";
-import { Server as ioServer } from "socket.io";
-import webSockets from "./helpers/webSockets.js";
+import { Server } from "socket.io";
+import routerChat from "./routes/chatRoutes.js";
+import { socketConnect } from "./helpers/webSockets.js";
+import { ChatService } from "./services/chatService.js";
 const __dirname = path.resolve();
 //servidor
 const app = express();
 //SERVIDOR HTTP CON FUNCIONALIDADES DE APP (EXPRESS)
 const httpServer = http.createServer(app);
 //SERVIDOR WEBSOCKET CON FUNCIONALIDADES DE HTTP
-const socketServer = new ioServer(httpServer);
+const io = new Server(httpServer);
 //conexion DB
 connectDB();
 
 //middlewares
 app.use(compression());
 app.use(express.json());
-app.use(session(sessionConfig));
 app.use(express.urlencoded({ extended: true }));
+app.use(session(sessionConfig));
 app.use(express.static(__dirname + "/src/public"));
 
 //MOTOR DE PLANTILLAS
@@ -49,12 +51,13 @@ app.engine(
 //DONDE ESTAN LOS ARCHIVOS DE PLANTILLA
 app.set("views", "src/views");
 
+io.on("connection", socketConnect);
 //rutas
 app.use("/", routerLogin);
 app.use("/productos", routerProducts);
 app.use("/carrito", routerCart);
 //app.use("/orders", routerOrder);
-//app.use("/chat");
+app.use("/chat", routerChat);
 app.use("/config", routerInfo);
 
 // app.get("*.ico", function () {});
@@ -63,7 +66,6 @@ app.use((err, req, res, next) => {
   logger.error(err);
   res.status(err.status).json({ status: err.status, message: err.message });
 }); */
-socketServer.on('connection',webSockets.connection)
 const PORT = config.PORT;
 const server = httpServer.listen(PORT, () => {
   logger.info(`conectado al puerto ${PORT}`);

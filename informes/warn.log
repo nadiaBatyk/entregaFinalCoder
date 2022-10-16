@@ -1,1 +1,6 @@
 {"code":"ERR_HTTP_HEADERS_SENT","level":"error"}
+{"level":"error","message":"error en el servidor Error: listen EADDRINUSE: address already in use :::8080"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}

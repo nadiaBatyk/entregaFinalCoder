@@ -1,4 +1,5 @@
 import { ErrorCustom } from "../../../error/errorCustom.js";
+import MongoDBDAO from "../../db/mongoDB/MongoDBDAO.js";
 import messageSchema from "../../models/messageSchema.js";
 
 let instance = null;
@@ -12,7 +13,9 @@ class MongoDBMessages extends MongoDBDAO {
   }
   async getByEmail(email) {
     try {
-      const allData = await this.collection.find({ email: email });
+      const allData = await this.collection.find({
+        $or: [{ emailTo: email }, { emailFrom: email }],
+      });
 
       if (allData?.length) {
         return allData;

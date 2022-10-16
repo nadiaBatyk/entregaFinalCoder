@@ -14,8 +14,8 @@ export class ChatService {
         return chats.map((c) => new MessageDTO(c));
       }
       async createMessage(message) {
-        const message = await this.chatDao.create(message);
-        return new MessageDTO(message);
+        const newMessage = await this.chatDao.create(message);
+        return new MessageDTO(newMessage);
       }
       
 }

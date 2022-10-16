@@ -1,4 +1,4 @@
-import { ChatService } from "../services/chatService";
+import { ChatService } from "../services/chatService.js";
 
 export class ChatController{
     constructor() {
@@ -6,8 +6,11 @@ export class ChatController{
       } 
       getMessages = async (req, res, next) => {
         try {
-          let messages = await this.chatService.getMessages();
-          return res.json(messages);
+          
+          return  res.render("layouts/chat", {
+            layout: "chat",
+           
+          });
         } catch (error) {
           return next(error);
         }
@@ -22,13 +25,5 @@ export class ChatController{
         }
       };
     
-      createMessage = async (req, res, next) => {
-        try {
-          let message = req.body;
-          let newMessage = await this.chatService.createMessage(message);
-          return res.json(newMessage);
-        } catch (error) {
-          return next(error);
-        }
-      };
+      
 }

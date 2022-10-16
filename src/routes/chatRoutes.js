@@ -1,14 +1,13 @@
 import { Router } from "express";
-import { ChatController } from "../controllers/chatController";
+import { ChatController } from "../controllers/chatController.js";
 
 const routerChat = Router();
 const chatController = new ChatController();
 
-routerProducts
+routerChat
   .route("/")
   .get(chatController.getMessages)
-  .post(chatController.createMessage);
 
-routerProducts.route("/:email").get(chatController.getMessagesByEmail);
+  routerChat.route("/:email").get(chatController.getMessagesByEmail);
 
 export default routerChat;
