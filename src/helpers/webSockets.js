@@ -6,7 +6,7 @@ const chatService = new ChatService();
 async function socketConnect(socket) {
   try {
     const messages = await chatService.getMessages();
-
+    
     socket.emit("datosMensajes", messages);
   } catch (error) {
     logger.error(error);

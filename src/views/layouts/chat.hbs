@@ -21,10 +21,10 @@
       <form class="mx-auto">
         <div class="row">
 
-          <div class="mb-3 w-50">
+          <div class="mb-3 w-25">
             <label for="emailFrom" class="form-label">De: </label>
             <input
-              class="form-control input-size-m mb-2"
+              class="form-control mb-2"
               type="text"
               readonly
               id="emailFrom"
@@ -36,19 +36,16 @@
               logueado ahora</small>
 
           </div>
-          <div class="mb-3 w-50">
+          <div class="mb-3 w-25">
             <label for="emailTo" class="form-label">Mail destinatario:</label>
             <input
-              class="form-control input-size-m mb-2"
+              class="form-control mb-2"
               type="text"
               id="emailTo"
               aria-required="true"
               placeholder="Ingresá el mail del destinatario"
             />
           </div>
-        </div>
-        <div class="row">
-
           <div class="mb-3 w-25">
             <label for="type" class="form-label">Tipo de mensaje:</label>
             <input
@@ -61,9 +58,11 @@
               placeholder="{{userData.type}}"
             />
           </div>
+        </div>
+        <div class="row">
 
           <div class="row w-75">
-            <label for="type" class="form-label mb-0">Tu mensaje:</label>
+            <label for="type" class="form-label mb-2">Tu mensaje:</label>
             <div class="col-auto">
 
               <input
