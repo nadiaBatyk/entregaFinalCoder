@@ -5,7 +5,7 @@ import UserDaoFactory from "../model/DAOs/user/userDAOFactory.js";
 import bcrypt from "bcrypt";
 import * as userHelpers from "../helpers/userHelpers.js";
 import { PlantillaNuevoUser } from "../helpers/emails/nuevoUsuario.js";
-import UserDTO from "../model/DTOs/UserDTO.js";
+import UserDTO from "../model/DTOs/userDTO.js";
 export class UserService {
   constructor() {
     this.userDao = UserDaoFactory.get(config.DB_NAME);
