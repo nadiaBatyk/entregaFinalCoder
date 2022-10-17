@@ -1,5 +1,5 @@
 import config from "../config/config.js";
-import { ErrorCustom } from "../error/errorCustom.js";
+import { ErrorCustom } from "../helpers/errorCustom.js";
 import UserDaoFactory from "../model/DAOs/user/userDAOFactory.js";
 import UserDTO from "../model/DTOs/UserDTO.js";
 import bcrypt from "bcrypt";

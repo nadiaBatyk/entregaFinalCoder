@@ -1,4 +1,4 @@
-import { ErrorCustom } from "../../../error/errorCustom.js";
+import { ErrorCustom } from "../../../helpers/errorCustom.js";
 import MongoDBDAO from "../../db/mongoDB/MongoDBDAO.js";
 import cartSchema from "../../models/cartSchema.js";
 let instance = null;
@@ -14,7 +14,7 @@ class MongoDBCart extends MongoDBDAO {
     try {
       const productsInCart = await this.collection.findById(
         { _id: idCart },
-        { products: 1,_id:0 }
+        { products: 1, _id: 0 }
       );
       if (productsInCart?.products) {
         return productsInCart.products;
@@ -39,7 +39,7 @@ class MongoDBCart extends MongoDBDAO {
             products: { _id: idProduct },
           },
         },
-        { safe: true ,new:true}
+        { safe: true, new: true }
       );
       if (newCart) {
         return `Se eliminó el producto ${idProduct} del carrito ${idCart}`;

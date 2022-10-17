@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { ErrorCustom } from "../../../error/errorCustom.js";
+import { ErrorCustom } from "../../../helpers/errorCustom.js";
 
 let instance = null;
 class MongoDBDAO {
@@ -37,8 +37,6 @@ class MongoDBDAO {
       }
     }
   }
-  
-  
 
   async deleteById(id) {
     try {

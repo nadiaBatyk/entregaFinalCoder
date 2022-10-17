@@ -1,6 +1,6 @@
 import MongoDBDAO from "../../db/mongoDB/MongoDBDAO.js";
 import userSchema from "../../models/userSchema.js";
-import { ErrorCustom } from "../../../error/errorCustom.js";
+import { ErrorCustom } from "../../../helpers/errorCustom.js";
 let instance = null;
 class MongoDBUsers extends MongoDBDAO {
   constructor() {

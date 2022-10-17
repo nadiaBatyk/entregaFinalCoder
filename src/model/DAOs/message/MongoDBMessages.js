@@ -1,4 +1,4 @@
-import { ErrorCustom } from "../../../error/errorCustom.js";
+import { ErrorCustom } from "../../../helpers/errorCustom.js";
 import MongoDBDAO from "../../db/mongoDB/MongoDBDAO.js";
 import messageSchema from "../../models/messageSchema.js";
 

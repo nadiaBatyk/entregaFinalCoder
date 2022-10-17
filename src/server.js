@@ -50,7 +50,7 @@ app.engine(
 
 //DONDE ESTAN LOS ARCHIVOS DE PLANTILLA
 app.set("views", "src/views");
-
+//funcionalidad servidor websocket
 io.on("connection", socketConnect);
 //rutas
 app.use("/", routerLogin);
