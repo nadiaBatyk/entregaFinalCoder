@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { ErrorCustom } from "../helpers/errorCustom.js";
 
 function createUserValidator(req, res, next) {
   const userRegisterschema = Joi.object({
@@ -40,7 +41,12 @@ function logUserValidator(req, res, next) {
   const { error, value } = userLogschema.validate(req.body, options);
 
   if (error) {
-    next(`Validation error: ${error.details.map((x) => x.message).join(", ")}`);
+    const err = new ErrorCustom(
+      ` ${error.details.map((x) => x.message).join(", ")}`,
+      400,
+      "Bad request"
+    );
+    throw err;
   } else {
     req.body = value;
     next();

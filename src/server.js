@@ -53,7 +53,7 @@ app.set("views", "src/views");
 io.on("connection", socketConnect);
 //rutas
 app.use("/", routerUsers);
-app.use("/productos", routerProducts);
+app.use("/productos", verifyToken,routerProducts);
 app.use("/carrito", routerCart);
 app.use("/orders", routerOrder);
 app.use("/chat", routerChat);
@@ -63,7 +63,7 @@ app.get("*.ico", function () {});
  app.use("*", notFoundRouter);
 app.use((err, req, res, next) => {
   logger.error(err);
-  const errorDescription = { status: err.status, message: err.message }
+  const errorDescription = { status: err.status, message: err.message,name:err.name }
   res.render("layouts/error", { layout: "error",errorDescription });
   
 }); 

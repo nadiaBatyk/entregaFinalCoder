@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { ErrorCustom } from "../helpers/errorCustom.js";
 
 function createCartValidator(req, res, next) {
   const createCartSchema = Joi.object({
@@ -20,7 +21,13 @@ function createCartValidator(req, res, next) {
   const { error, value } = createCartSchema.validate(req.body, options);
 
   if (error) {
-    next(`Validation error: ${error.details.map((x) => x.message).join(", ")}`);
+    const err = new ErrorCustom(
+      ` ${error.details.map((x) => x.message).join(", ")}`,
+      400,
+      "Bad request"
+    );
+    throw err;
+    
   } else {
     req.body = value;
     next();

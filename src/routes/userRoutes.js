@@ -12,7 +12,10 @@ routerUsers
   .route("/register")
   .get(userController.registerRender)
   .post(createUserValidator, userController.createUser);
-routerUsers.route("/login").post(logUserValidator, userController.logUser);
+routerUsers
+  .route("/login")
+  .post(logUserValidator, userController.logUser)
+  .get(userController.loginRender);
 routerUsers.route("/users").get(userController.getUsers);
 
 export default routerUsers;

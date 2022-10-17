@@ -11,18 +11,24 @@
     />
     <link rel="stylesheet" href="/styles.css" />
 
-    <title>Error Login</title>
+    <title>⛔️Error</title>
   </head>
   <body>
     <div class="container mt-5">
 
       <h2>Ocurrió un error </h2>
+      <p>Nombre: {{errorDescription.name}} </p>
       <p>Estado: {{errorDescription.status}} </p>
       <p>Descripcion: {{errorDescription.message}} </p>
+
       <button class="btn btn-info" onclick="location.href='/productos'">Ir a
         productos</button>
       <button class="btn btn-success" onclick="location.href='/chat'">Ir al chat</button>
+
+      <button class="btn btn-dark" onclick="location.href='/'">Ir a login</button>
+
     </div>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
