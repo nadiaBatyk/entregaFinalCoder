@@ -1,35 +1,35 @@
-.mail{
-    color: blue;
-    font-weight: 800;
+.mail {
+  color: blue;
 }
-.fecha{
-    color: brown;
+.fecha {
+  color: brown;
 }
-.mensaje{
-    color: green;
-    
+.mensaje {
+  color: green;
 }
-.flex{
-    display: inline-flex;
-    
+.mensaje-container {
+  background-color: lightsteelblue;
 }
-.bg-color{
-    background-color: lightgray;
+.flex {
+  display: inline-flex;
 }
-.table-text{
-    vertical-align: middle;
-    font-weight: 500;
+.bg-color {
+  background-color: #fff;
 }
-.table-img{
-    width: 50px;
-    height: 50px;
+.table-text {
+  vertical-align: middle;
+  font-weight: 500;
 }
-.input-size-xs{
-    width: 150px;
+.table-img {
+  width: 50px;
+  height: 50px;
 }
-.input-size-m{
-    width: 500px;
+.input-size-xs {
+  width: 100px;
 }
-.input-size-l{
-    width: 700px;
+.input-size-m {
+  width: 500px;
+}
+.input-size-l {
+  width: 700px;
 }

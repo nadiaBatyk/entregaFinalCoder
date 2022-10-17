@@ -8,6 +8,9 @@ export class ChatController {
   getMessages = async (req, res, next) => {
     try {
       const { user } = req.session;
+      if(!user){
+        return res.redirect('/')
+      }
       const userType = user.email == config.ADMIN_MAIL ? "sistema" : "usuario";
       const userData = {type:userType,email:user.email}
       return res.render("layouts/chat", {

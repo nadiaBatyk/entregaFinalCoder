@@ -12,55 +12,76 @@
     />
     <link rel="stylesheet" href="styles.css" />
 
-    <title>API - WEBSOCKET </title>
+    <title>EcommerceChat </title>
   </head>
 
   <body>
-    <div class="container mt-5 w-75 bg-color p-5 mb-5">
+    <div class="container bg-color p-4 h-100">
       <h2 class="mb-3">Centro de mensajes</h2>
-      <form>
-        <input
-          class="form-control input-size-m mb-2"
-          type="text"
-          disabled
-          id="emailFrom"
-          aria-required="true"
-          value="{{userData.email}}"
-          placeholder="{{userData.email}}"
-        />
-        <input
-          class="form-control input-size-m mb-2"
-          type="text"
-          id="emailTo"
-          aria-required="true"
-          placeholder="Ingresá el mail del destinatario"
-        />
-        <input
-          class="form-control input-size-m mb-2"
-          type="text"
-          disabled
-          value="{{userData.type}}"
-          id="type"
-          aria-required="true"
-          placeholder="{{userData.type}}"
-        />
-        
-        <div class="row g-3">
-          <div class="col-auto">
+      <form class="mx-auto">
+        <div class="row">
+
+          <div class="mb-3 w-50">
+            <label for="emailFrom" class="form-label">De: </label>
             <input
-              class="form-control input-size-l mb-2"
+              class="form-control input-size-m mb-2"
               type="text"
-              id="text"
-              placeholder="Ingresá tu mensaje..."
+              readonly
+              id="emailFrom"
+              aria-required="true"
+              value="{{userData.email}}"
+              placeholder="{{userData.email}}"
+            />
+            <small class="form-text text-muted">Este mail es desde el que estás
+              logueado ahora</small>
+
+          </div>
+          <div class="mb-3 w-50">
+            <label for="emailTo" class="form-label">Mail destinatario:</label>
+            <input
+              class="form-control input-size-m mb-2"
+              type="text"
+              id="emailTo"
+              aria-required="true"
+              placeholder="Ingresá el mail del destinatario"
+            />
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="mb-3 w-25">
+            <label for="type" class="form-label">Tipo de mensaje:</label>
+            <input
+              class="form-control input-size-xs mb-2"
+              type="text"
+              readonly
+              value="{{userData.type}}"
+              id="type"
+              aria-required="true"
+              placeholder="{{userData.type}}"
             />
           </div>
 
-          <div class="col-auto">
-            <button
-              type="button"
-              class="btn btn-primary input-size-xs"
-              id="botonMensaje"
-            >Enviar</button>
+          <div class="row w-75">
+            <label for="type" class="form-label mb-0">Tu mensaje:</label>
+            <div class="col-auto">
+
+              <input
+                class="form-control input-size-l mb-2"
+                type="text"
+                id="text"
+                placeholder="Ingresá tu mensaje..."
+              />
+            </div>
+
+            <div class="col-auto">
+              <button
+                type="button"
+                class="btn btn-primary input-size-xs"
+                id="botonMensaje"
+              >Enviar</button>
+            </div>
+
           </div>
 
         </div>

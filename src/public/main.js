@@ -7,12 +7,19 @@ socket.on("datosMensajes", (mensaje) => {
 function renderMensajes(mensaje) {
   const html = mensaje
     .map((item) => {
-      return `<div class="flex">
-      <p class="mail mr-1">${item?.emailFrom} </p>
-      <p class="mail mr-1">${item?.emailTo} </p>
-      <p class="fecha mr-1">[${item.timestamp}] :</p>
-      <i class="mensaje">${item.text}</i>
-      <p class="fecha mr-1">[${item.type}] :</p>
+      return `<div class="card p-4 ">
+      <div class="flex">
+      <p class="fecha "> [Fecha]: ${item.timestamp} :</p>
+      <p class="fecha ">[Tipo mensaje]: ${item.type}:</p>
+      </div>
+      <div class="flex">
+      <p class="mail ">[De]: ${item?.emailFrom} </p>
+      <p class="mail "> [Para]: ${item?.emailTo} </p>
+      </div>
+      
+      
+      <p class="mensaje">[Mensaje]: ${item.text}</p>
+      
       
       
   </div>`;
