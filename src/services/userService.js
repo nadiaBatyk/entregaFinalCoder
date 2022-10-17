@@ -4,6 +4,7 @@ import UserDaoFactory from "../model/DAOs/user/userDAOFactory.js";
 import UserDTO from "../model/DTOs/UserDTO.js";
 import bcrypt from "bcrypt";
 import * as userHelpers from "../helpers/userHelpers.js";
+import { PlantillaNuevoUser } from "../helpers/emails/nuevoUsuario.js";
 export class UserService {
   constructor() {
     this.userDao = UserDaoFactory.get(config.DB_NAME);
@@ -22,8 +23,8 @@ export class UserService {
       const u = await this.userDao.create(user);
       const newUser = new UserDTO(u);
       newUser.token = userHelpers.signToken(newUser);
-      /* const mail = new PlantillaNuevoUser(user);
-      mail.sendMail(); */
+      const mail = new PlantillaNuevoUser(user);
+      mail.sendMail();
       return newUser;
     } catch (error) {
       throw error;
