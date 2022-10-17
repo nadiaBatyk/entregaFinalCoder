@@ -54,10 +54,10 @@ io.on("connection", socketConnect);
 //rutas
 app.use("/", routerUsers);
 app.use("/productos", verifyToken,routerProducts);
-app.use("/carrito", routerCart);
-app.use("/orders", routerOrder);
-app.use("/chat", routerChat);
-app.use("/config", routerInfo);
+app.use("/carrito",verifyToken, routerCart);
+app.use("/orders",verifyToken, routerOrder);
+app.use("/chat",verifyToken, routerChat);
+app.use("/config",verifyToken, routerInfo);
  
 app.get("*.ico", function () {});
  app.use("*", notFoundRouter);
