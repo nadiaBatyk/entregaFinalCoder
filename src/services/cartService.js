@@ -11,6 +11,10 @@ export class CartService {
     const carts = await this.cartDao.getAll();
     return carts.map((c) => new CartDto(c));
   }
+  async getCartById(id) {
+    const cart = await this.cartDao.getById(id);
+    return new CartDto(cart);
+  }
   async getProductsCart(id) {
     const products = await this.cartDao.getProductsInCart(id);
     return products.map((p) => new ProductDTO(p));

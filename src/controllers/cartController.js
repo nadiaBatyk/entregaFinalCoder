@@ -12,6 +12,15 @@ export class CartController {
       return next(error);
     }
   };
+  getCartById = async (req, res, next) => {
+    try {
+      let { id } = req.params;
+      let cart = await this.cartService.getCartById(id);
+      return res.json(cart);
+    } catch (error) {
+      return next(error);
+    }
+  };
   getProductsCart = async (req, res, next) => {
     try {
       let { id } = req.params;
