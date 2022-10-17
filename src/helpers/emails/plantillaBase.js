@@ -2,7 +2,7 @@ import transporter from "../../config/nodeMailer.js"
 
 export class PlantillaMail {
     constructor(to,subject,text){
-        this.from=`'"Nadu Dev 👩‍💻" <naduCodes@gmail.com>'`,
+        this.from=`'"Ecommerce✨ " <naduCodes@gmail.com>'`,
         this.to=to,
         this.subject=subject,
         this.text=text

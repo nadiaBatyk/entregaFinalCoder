@@ -1,4 +1,4 @@
-import MongoDBOrder from "./mongoDBOrder";
+import MongoDBOrder from "./mongoDBOrder.js";
 
 class OrderDaoFactory {
   static get(dbName) {

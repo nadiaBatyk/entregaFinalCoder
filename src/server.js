@@ -19,6 +19,7 @@ import { Server } from "socket.io";
 import routerChat from "./routes/chatRoutes.js";
 import { socketConnect } from "./helpers/webSockets.js";
 import { ChatService } from "./services/chatService.js";
+import routerOrder from "./routes/orderRoutes.js";
 const __dirname = path.resolve();
 //servidor
 const app = express();
@@ -56,7 +57,7 @@ io.on("connection", socketConnect);
 app.use("/", routerLogin);
 app.use("/productos", routerProducts);
 app.use("/carrito", routerCart);
-//app.use("/orders", routerOrder);
+app.use("/orders", routerOrder);
 app.use("/chat", routerChat);
 app.use("/config", routerInfo);
 

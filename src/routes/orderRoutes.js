@@ -1,17 +1,16 @@
 import { Router } from "express";
-/* import * as daos from "../persistencia/daos/index.js";
+import { OrderController } from "../controllers/orderController.js";
 
 const routerOrder = Router();
-
+const orderController = new OrderController()
 routerOrder
   .route("/")
-  .post(daos.orderDao.createOrder)
-  .get(daos.orderDao.getOrders)
-  .get(daos.orderDao.getOrderByUser);
+  .post(orderController.createOrder)
+  .get(orderController.getOrders)
 
 routerOrder
   .route("/:id")
-  .get(daos.orderDao.getOrders)
-  .delete(daos.orderDao.deleteOrder);
+  .get(orderController.getOrderById)
+  .delete(orderController.deleteOrder);
 
-export default routerOrder; */
+export default routerOrder;
