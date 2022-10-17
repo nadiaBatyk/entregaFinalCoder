@@ -1,0 +1,12 @@
+{"level":"error","name":"Unauthenticated","status":403}
+{"level":"error","name":"Unauthenticated","status":403}
+{"level":"error","name":"Non-existent user","status":404}
+{"level":"error","name":"Non-existent user","status":404}
+{"level":"error","name":"Unauthenticated","status":403}
+{"level":"error","name":"Unauthenticated","status":403}
+{"level":"error","name":"Invalid Token","status":401}
+{"level":"error","name":"Invalid Token","status":401}
+{"level":"error","name":"Unauthenticated","status":403}
+{"level":"error","name":"Unauthenticated","status":403}
+{"level":"error","name":"Non-existent user","status":404}
+{"level":"error","name":"Unauthenticated","status":403}

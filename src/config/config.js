@@ -8,7 +8,7 @@ export default {
   ADMIN_TEL:process.env.ADMIN_TEL,
   TOKEN_KEY:process.env.TOKEN_KEY,
   MONGODB: {
-    URL: process.env.MONGO_URL,
+    URL: process.env.NODE_ENV=='dev'? process.env.MONGO_URL_DEV:process.env.MONGO_URL_PROD,
     options: {
       useNewUrlParser: true,
       useUnifiedTopology: true,

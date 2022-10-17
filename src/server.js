@@ -53,20 +53,23 @@ app.set("views", "src/views");
 io.on("connection", socketConnect);
 //rutas
 app.use("/", routerUsers);
-app.use("/productos", verifyToken,routerProducts);
-app.use("/carrito",verifyToken, routerCart);
-app.use("/orders",verifyToken, routerOrder);
-app.use("/chat",verifyToken, routerChat);
-app.use("/config",verifyToken, routerInfo);
- 
+app.use("/productos", routerProducts);
+app.use("/carrito", routerCart);
+app.use("/orders", routerOrder);
+app.use("/chat", verifyToken, routerChat);
+app.use("/config", verifyToken, routerInfo);
+
 app.get("*.ico", function () {});
- app.use("*", notFoundRouter);
+app.use("*", notFoundRouter);
 app.use((err, req, res, next) => {
   logger.error(err);
-  const errorDescription = { status: err.status, message: err.message,name:err.name }
-  res.render("layouts/error", { layout: "error",errorDescription });
-  
-}); 
+  const errorDescription = {
+    status: err.status,
+    message: err.message,
+    name: err.name,
+  };
+  res.render("layouts/error", { layout: "error", errorDescription });
+});
 const PORT = config.PORT;
 const server = httpServer.listen(PORT, () => {
   logger.info(`conectado al puerto ${PORT}`);

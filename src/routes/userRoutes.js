@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { UserController } from "../controllers/userController.js";
+import verifyToken from "../middlewares/auth.js";
 import {
   createUserValidator,
   logUserValidator,
@@ -16,6 +17,6 @@ routerUsers
   .route("/login")
   .post(logUserValidator, userController.logUser)
   .get(userController.loginRender);
-routerUsers.route("/users").get(userController.getUsers);
+routerUsers.route("/users").get(verifyToken,userController.getUsers);
 
 export default routerUsers;

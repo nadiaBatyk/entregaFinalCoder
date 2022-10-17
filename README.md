@@ -20,7 +20,6 @@ Se pueden indicar las siguientes opciones como variable de entorno, al momento d
 5. Error => GET rutas "*" (notFound) ó si ocurre un error de validacion ó item no encontrado en cualquier otro método, etc. 
 
 - El resto de las rutas se pueden probar via postman con el crud completo (get,post,put,delete) según cada caso.
-- El GET Ruta '/' es el único que no requiere que estes logueado => **TODAS** las demás rutas SI requieren que el usuario este logueado para no arrojar error.
 - Los POST / PUT de las rutas tienen validators, por lo que si algun campo no pasa la validaación dara error.
 - El schema del carrito tiene un objeto tipo userSchema porque era necesario para obtener informacion del usuario para el envio de mails y mensajes al momento de registrar una nueva orden. Era más conveniente que sólo agregar el mail ó la dirección al schema.
 - Sólo para los fines de evaluación, no incluí en el .gitignore el archivo .env , asi se pueden ver las variables de entorno, pero sino normalmente siempre incluyo el .env en el gitignore
