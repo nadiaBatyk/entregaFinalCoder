@@ -1,12 +1,12 @@
 import { PlantillaMail } from "./plantillaBase.js";
-import dotenv from "dotenv";
-dotenv.config();
+import config from "../../config/config.js";
+
 export class PlantillaNuevoPedido extends PlantillaMail {
   constructor(pedido) {
     
     super(
-      process.env.ADMIN_MAIL,
-      `Nuevo pedido de ${pedido.user.name} - Email:${pedido.user.email}`,``
+      config.ADMIN_MAIL,
+      `Nuevo pedido de ${pedido.cart.user.fullName} - Email:${pedido.cart.user.email}`,``
     );
     this.productos=pedido.cart.products
     this.text=`Lista de productos:\n ${this.armarListaProductos()}`

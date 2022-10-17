@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
+import cartSchema from "./cartSchema";
 
 const orderSchema = new mongoose.Schema({
-  cart: mongoose.Schema.Types.Mixed,
-  user: mongoose.Schema.Types.Mixed,
+  cart: {type:cartSchema,require:true},
+  orderNumber:{type: Number},
+  state: { type: String, default:'generada' },
   timestamp:{type:Date,default: Date.now}
 });
 export default orderSchema;

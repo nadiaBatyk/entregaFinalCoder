@@ -4,9 +4,9 @@ class OrderDaoFactory {
   static get(dbName) {
     switch (dbName) {
       case "mongoDB":
-        return new MongoDBOrder();
+        return MongoDBOrder.getInstance()
       default:
-        return new MongoDBOrder();
+        return MongoDBOrder.getInstance()
     }
   }
 }

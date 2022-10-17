@@ -1,7 +1,9 @@
 class OrderDTO{
     constructor(data){
         this.cart=data.cart,
-        this.user=data.user,
+        this.orderNumber=data.orderNumber,
+        this.state=data.state,
+        this.timestamp=data.timestamp,
         this._id=data._id
     }
 }
