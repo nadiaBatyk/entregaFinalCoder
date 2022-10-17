@@ -1,11 +1,12 @@
 import { Router } from "express";
 import { OrderController } from "../controllers/orderController.js";
+import { createOrderValidator } from "../validators/orderValidator.js";
 
 const routerOrder = Router();
 const orderController = new OrderController()
 routerOrder
   .route("/")
-  .post(orderController.createOrder)
+  .post(createOrderValidator, orderController.createOrder)
   .get(orderController.getOrders)
 
 routerOrder

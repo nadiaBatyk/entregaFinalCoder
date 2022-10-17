@@ -6,7 +6,6 @@ function createCartValidator(req, res, next) {
     user: {
       fullName: Joi.string().lowercase().trim().required().max(100),
       email: Joi.string().lowercase().trim().email().required().max(200),
-
       phone: Joi.string().min(8).max(20).required(),
       address: Joi.string().max(300).required(),
     },
