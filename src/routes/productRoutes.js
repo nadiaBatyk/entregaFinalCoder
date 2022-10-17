@@ -12,8 +12,7 @@ routerProducts
 
 routerProducts
   .route("/:id")
-  .get(productController.getProducts)
+  .get(productController.getProductById)
   .put(createProductValidator,productController.updateProduct)
   .delete(productController.deleteProduct)
-
 export default routerProducts;

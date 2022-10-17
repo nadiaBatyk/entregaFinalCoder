@@ -14,6 +14,11 @@ export class ProductService {
         const prod = await this.productDao.getByCategory(categoria);
         return prod.map((p) => new ProductDTO(p));
       }
+      async getProductById(id) {
+        const prod = await this.productDao.getById(id)
+        const descripcion = {foto:prod.url,precio:prod.price,cantidad:prod.quantity}
+        return descripcion
+      }
       async createProduct(product) {
         const prod = await this.productDao.create(product);
         return new ProductDTO(prod);

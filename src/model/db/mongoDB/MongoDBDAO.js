@@ -21,9 +21,9 @@ class MongoDBDAO {
   }
   async getById(id) {
     try {
-      const idData = await this.collection.find({ _id: id });
+      const idData = await this.collection.findById(id);
 
-      if (idData?.length) {
+      if (idData) {
         return idData;
       }
       const err = new ErrorCustom("Item no encontrado", 404, "Not found");
