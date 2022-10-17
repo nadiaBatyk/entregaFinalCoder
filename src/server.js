@@ -1,10 +1,8 @@
 import express from "express";
 import routerCart from "./routes/cartRoutes.js";
-//import notFoundRouter from "./routes/notFound.js";
+import notFoundRouter from "./routes/notFound.js";
 import routerProducts from "./routes/productRoutes.js";
-import routerLogin from "./routes/loginRoutes.js";
 import verifyToken from "./middlewares/auth.js";
-//import routerOrder from "./routes/orderRoutes.js";
 import logger from "./config/winstonConfig.js";
 import compression from "compression";
 import config from "./config/config.js";
@@ -18,8 +16,8 @@ import http from "http";
 import { Server } from "socket.io";
 import routerChat from "./routes/chatRoutes.js";
 import { socketConnect } from "./helpers/webSockets.js";
-import { ChatService } from "./services/chatService.js";
 import routerOrder from "./routes/orderRoutes.js";
+import routerUsers from "./routes/userRoutes.js";
 const __dirname = path.resolve();
 //servidor
 const app = express();
@@ -54,19 +52,21 @@ app.set("views", "src/views");
 //funcionalidad servidor websocket
 io.on("connection", socketConnect);
 //rutas
-app.use("/", routerLogin);
+app.use("/", routerUsers);
 app.use("/productos", routerProducts);
 app.use("/carrito", routerCart);
 app.use("/orders", routerOrder);
 app.use("/chat", routerChat);
 app.use("/config", routerInfo);
-
-// app.get("*.ico", function () {});
-/* app.use("*", notFoundRouter);
+ 
+app.get("*.ico", function () {});
+ app.use("*", notFoundRouter);
 app.use((err, req, res, next) => {
   logger.error(err);
-  res.status(err.status).json({ status: err.status, message: err.message });
-}); */
+  const errorDescription = { status: err.status, message: err.message }
+  res.render("layouts/error", { layout: "error",errorDescription });
+  
+}); 
 const PORT = config.PORT;
 const server = httpServer.listen(PORT, () => {
   logger.info(`conectado al puerto ${PORT}`);

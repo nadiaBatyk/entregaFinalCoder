@@ -1,21 +1,39 @@
 import { Router } from "express";
-
+import { ErrorCustom } from "../helpers/errorCustom.js";
 
 const notFoundRouter = Router();
-
-notFoundRouter.get('/',(req,res)=>{
-    return res.status(404).json({mensaje:`Error ruta ${req.baseUrl}, metodo ${req.method} no implementada`})
-})
-notFoundRouter.post('/',(req,res)=>{
-    return res.status(404).json({mensaje:`Error ruta ${req.baseUrl}, metodo ${req.method} no implementada`})
-})
-notFoundRouter.put('/',(req,res)=>{
-    return res.status(404).json({mensaje:`Error ruta ${req.baseUrl}, metodo ${req.method} no implementada`})
-})
-notFoundRouter.delete('/',(req,res)=>{
-    return res.status(404).json({mensaje:`Error ruta ${req.baseUrl}, metodo ${req.method} no implementada`})
-})
-
+notFoundRouter.route("/").get((req, res, next) => {
+  const err = new ErrorCustom(
+    `Error ruta ${req.baseUrl}, metodo ${req.method} no implementada`,
+    404,
+    "Not Implemented"
+  );
+  throw err;
+});
+notFoundRouter.route("/").post((req, res, next) => {
+    const err = new ErrorCustom(
+      `Error ruta ${req.baseUrl}, metodo ${req.method} no implementada`,
+      404,
+      "Not Implemented"
+    );
+    throw err;
+  });
+  notFoundRouter.route("/").put((req, res, next) => {
+    const err = new ErrorCustom(
+      `Error ruta ${req.baseUrl}, metodo ${req.method} no implementada`,
+      404,
+      "Not Implemented"
+    );
+    throw err;
+  });
+  notFoundRouter.route("/").delete((req, res, next) => {
+    const err = new ErrorCustom(
+      `Error ruta ${req.baseUrl}, metodo ${req.method} no implementada`,
+      404,
+      "Not Implemented"
+    );
+    throw err;
+  });
 
 
 export default notFoundRouter;
